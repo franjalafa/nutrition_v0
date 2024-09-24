@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Patients;
 
 use Inertia\Inertia;
-use App\Models\Patient;
-
-use App\Http\Resources\PatientResource;
-use App\Http\Requests\PatientCreateRequest;
-use App\Http\Requests\PatientUpdateRequest;
+use App\Models\Patients\Patient;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Patients\PatientResource;
+use App\Http\Requests\Patients\StorePatientRequest;
+use App\Http\Requests\Patients\UpdatePatientRequest;
 
 class PatientController extends Controller
 {
@@ -16,7 +16,6 @@ class PatientController extends Controller
      */
     public function index()
     {
-
         $query = Patient::query();
         $sortFields = request("sort_field", 'created_at');
         $sortDirection = request("sort_direction", "desc");
@@ -68,7 +67,7 @@ class PatientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PatientCreateRequest $request)
+    public function store(StorePatientRequest $request)
     {
         $data = $request->validated();
         Patient::create($data);
@@ -99,7 +98,7 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PatientUpdateRequest $request, Patient $patient)
+    public function update(UpdatePatientRequest $request, Patient $patient)
     {
         $data = $request->validated();
         $patient->update($data);
