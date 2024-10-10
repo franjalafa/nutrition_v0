@@ -163,24 +163,29 @@ export default function Index({ auth, patients, queryParams = null }) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {patients.data.map((patient) => (
-                                            <tr key={patient.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.id}</td>
-                                                <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.name}</td>
-                                                <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.surname_father}</td>
-                                                <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.surname_mother}</td>
-                                                <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.age}</td>
-                                                <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.gender}</td>
-                                                <td className="px-3 py-2 dark:text-gray-300 text-gray-700 flex justify-between">
-                                                    <Link href={route("patient.edit", patient.id)} className="w-4 ">
-                                                        <PencilSquareIcon className={"h-5 w-5 text-blue-500 hover:text-blue-600"} />
-                                                    </Link>
-                                                    <button onClick={() => deletePatient(patient)} >
-                                                        <TrashIcon className={"h-5 w-5 text-red-500 hover:text-red-600 mx-1"} />
-                                                    </button>
-                                                </td>
+                                        { patients.total > 0
+                                            ? patients.data.map((patient) => (
+                                                <tr key={patient.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                    <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.id}</td>
+                                                    <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.name}</td>
+                                                    <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.surname_father}</td>
+                                                    <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.surname_mother}</td>
+                                                    <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.age}</td>
+                                                    <td className="px-3 py-2 dark:text-gray-300 text-gray-700">{patient.gender}</td>
+                                                    <td className="px-3 py-2 dark:text-gray-300 text-gray-700 flex justify-between">
+                                                        <Link href={route("patient.edit", patient.id)} className="w-4 ">
+                                                            <PencilSquareIcon className={"h-5 w-5 text-blue-500 hover:text-blue-600"} />
+                                                        </Link>
+                                                        <button onClick={() => deletePatient(patient)} >
+                                                            <TrashIcon className={"h-5 w-5 text-red-500 hover:text-red-600 mx-1"} />
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                            : <tr className="border-red-700">
+                                                <td colSpan={7} className="px-3 py-2 dark:text-gray-300 text-gray-700 text-center uppercase">no se encontró información a mostrar</td>
                                             </tr>
-                                        ))}
+                                        }
                                     </tbody>
                                 </table>
                             </div>

@@ -45,6 +45,8 @@ class PatientController extends Controller
             ->withQueryString()
             ->onEachSide(1);
 
+        /* if (!$patients)
+            $patients['data'] = 'Sin información a mostrar'; */
 
         return Inertia::render(
             'Patient/Index',
